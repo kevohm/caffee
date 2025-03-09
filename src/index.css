@@ -1,0 +1,27 @@
+@import "tailwindcss";
+@config "../tailwind.config.js";
+
+:root{
+  --primary: #f9c06a;
+  --secondary: #603809;
+  --tertiary: #1e1e1e;
+  --white: #fff;
+  --black: #000;
+  --grey:#707070;
+  --playfair:  "Playfair Display", serif;
+  --clicker-script: "Clicker Script", serif;
+}
+
+
+body {
+    @apply font-playfair
+}
+button{
+    @apply cursor-pointer
+}
+.btn {
+  @apply px-6 py-2 rounded-full capitalize font-bold text-base;
+}
+.btn-primary {
+  @apply bg-[var(--primary)] text-[var(--tertiary)];
+}
