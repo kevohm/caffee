@@ -15,10 +15,19 @@ import coffeeSplashBoth from "../assets/coffee_splash_both.png";
 import coffeeSplashRight from "../assets/coffee_splash_right.png";
 import arrowLeftIcon from "../assets/left-arrow.png";
 import profileOne from "../assets/profile-1.jpg";
+import profileTwo from "../assets/profile-2.jpg";
+import profileThree from "../assets/profile-3.jpg";
+import profileFour from "../assets/profile-4.jpg";
 import arrowRightIcon from "../assets/right-arrow.png";
 import quoteIcon from "../assets/quote.png";
+import coffeeSubscribe from "../assets/coffee-subscribe.png";
+import coffeeFooter from "../assets/fotter_image.png";
+import coffeeRight from "../assets/coffee_left.png";
+import coffeeLeft from "../assets/coffee_right.png";
+import { useState } from "react";
 
 const Landing = () => {
+  const [currentTestimonial, setCurrentTestimonial] = useState(1)
   const coffees = [
     {
       name: "Cappuccinno",
@@ -71,8 +80,40 @@ const Landing = () => {
       desc: "Our Coffee prices are easy to afford",
     },
   ];
+  const testimonials = [
+    {
+      name: "John Doe",
+      role: "Project Manager",
+      feedback: "Caffee is simply the best! The coffee is amazing and the atmosphere is perfect for getting work done. I have been coming here for years and it never disappoints. The staff is always friendly and the environment is very conducive to productivity. Highly recommend!",
+      image: profileOne,
+    },
+    {
+      name: "Jane Smith",
+      role: "Software Engineer",
+      feedback: "I love coming to Caffee every morning. The coffee is always fresh and the staff is super friendly. It's the perfect place to start my day. The ambiance is great and I often find myself staying longer than planned just to enjoy the vibe. A must-visit for coffee enthusiasts!",
+      image: profileTwo,
+    },
+    {
+      name: "Sam Wilson",
+      role: "Designer",
+      feedback: "Caffee has the best coffee in town. I can't start my day without a cup from here. The quality of the coffee is unmatched and the variety of options available is impressive. The cozy setting makes it a great place to relax and get creative work done.",
+      image: profileThree,
+    },
+    {
+      name: "Lisa Brown",
+      role: "Marketing Specialist",
+      feedback: "The coffee at Caffee is top-notch. I highly recommend it to all coffee lovers. The rich flavors and the perfect blend make it a delightful experience every time. The customer service is exceptional and the overall experience is always pleasant. Definitely a favorite spot!",
+      image: profileFour,
+    },
+  ];
+  const nextTestimonial = ()=>{
+    setCurrentTestimonial(prev => prev === testimonials.length - 1 ? 0 : prev + 1)
+  }
+  const prevTestimonial = ()=>{
+    setCurrentTestimonial(prev => prev === 0 ? testimonials.length - 1 : prev - 1)
+  }
   return (
-    <main>
+    <main className="bg-white max-w-[1440px] mx-auto">
       <section
         className="w-full flex flex-col"
         style={{
@@ -85,17 +126,17 @@ const Landing = () => {
         <nav className="py-5 px-12 flex text-white justify-between">
           <p className="capitalize font-clicker-script text-3xl">Caffee</p>
           <ul className="flex space-x-5 items-center capitalize">
-            <li>Home</li>
-            <li>Contact Us</li>
-            <li>About us</li>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+            <li><a href="#about">About Us</a></li>
           </ul>
           <div className="flex items-center space-x-5">
-            <button>sign in</button>
-            <button className="btn btn-primary font-medium">sign up</button>
+            <button>Sign In</button>
+            <button className="btn btn-primary font-medium">Sign Up</button>
           </div>
         </nav>
         <div className="flex p-12">
-          <div className="text-white flex  flex-col space-y-5 text-xl max-w-[527px]">
+          <div className="text-white flex flex-col space-y-5 text-xl max-w-[527px]">
             <p>We’ve got your morning covered with</p>
             <span className="font-clicker-script text-[200px]">Coffee</span>
             <p>
@@ -103,7 +144,7 @@ const Landing = () => {
               best flavours coffee you will ever have. We provide the best for
               our customers.
             </p>
-            <button className="btn btn-primary w-max">order now</button>
+            <button className="btn btn-primary w-max">Order Now</button>
           </div>
         </div>
       </section>
@@ -120,18 +161,17 @@ const Landing = () => {
             Discover the best coffee
           </h2>
           <p className="text-grey text-xl">
-            Bean Scene is a coffee shop that provides you with quality coffee
+            Caffee is a coffee shop that provides you with quality coffee
             that helps boost your productivity and helps build your mood. Having
             a cup of coffee is good, but having a cup of real coffee is greater.
             There is no doubt that you will enjoy this coffee more than others
             you have ever tasted.
           </p>
-          <button className="btn btn-primary">learn more</button>
+          <button className="btn btn-primary">Learn More</button>
         </div>
         <div className="max-w-[500px] flex-[0.5]">
           <img src={coffeeCup} alt="coffee cup" />
         </div>
-        {/* <img className="absolute left-0 bottom-[-30%] translate-y-[-50%]" src={coffeeSplash} alt="coffee splash" /> */}
       </section>
       <section className="flex flex-col items-center p-12 space-y-12">
         <header className="mx-auto flex flex-col space-y-2.5 items-center">
@@ -199,6 +239,7 @@ const Landing = () => {
             );
           })}
         </div>
+        <div className="mx-auto flex flex-col space-y-2.5 items-center"></div>
         <div className="mx-auto flex flex-col space-y-2.5 items-center">
           <p className="text-grey text-xl">
             Great ideas start with great coffee, Lets help you achieve that
@@ -247,46 +288,78 @@ const Landing = () => {
         <div className="w-full px-12">
           <div className="relative bg-primary/5 h-[550px] py-10 px-26 border border-primary/50 flex flex-col space-y-12 items-center justify-center">
             <p className="text-center text-grey leading-8">
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry&apos;s standard dummy
-              text ever since the 1500s, when an unknown printer took a galley
-              of type and scrambled it to make a type specimen book. It has
-              survived not only five centuries, but also the leap into
-              electronic typesetting, remaining essentially unchanged. It was
-              popularised in the 1960s with the release of Letraset.....
+              {testimonials[currentTestimonial].feedback}
             </p>
             <div className="flex flex-col space-y-2.5 items-center">
-              <p className="text-secondary text-3xl font-bold">John Doe</p>
-              <p className="text-grey">Project Manager</p>
+              <p className="text-secondary text-3xl font-bold">{testimonials[currentTestimonial].name}</p>
+              <p className="text-grey">{testimonials[currentTestimonial].role}</p>
             </div>
               <span className=" absolute top-26 left-22 text-9xl transform -translate-x-1/2 -translate-y-1/2">
                 <img src={quoteIcon} alt="quote icon" />
               </span>
             <div className="h-24 w-24 absolute -bottom-36 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
               <img
-                className="h-full w-full rounded-lg object-center object-cover"
-                src={profileOne}
+                className="h-full w-full rounded-lg object-top object-cover"
+                src={testimonials[currentTestimonial].image}
                 alt="john doe"
               />
             </div>
-            <button className="bg-primary p-5 rounded-lg flex items-center justify-center top-1/2 -right-8 absolute">
+            <button onClick={prevTestimonial} className="bg-primary p-5 rounded-lg flex items-center justify-center top-1/2 -right-8 absolute">
               <img src={arrowRightIcon} alt="arrow right" />
             </button>
-            <button className="bg-primary p-5 rounded-lg flex items-center justify-center top-1/2 -left-8 absolute">
+            <button onClick={nextTestimonial} className="bg-primary p-5 rounded-lg flex items-center justify-center top-1/2 -left-8 absolute">
               <img src={arrowLeftIcon} alt="arrow left" />
             </button>
           </div>
         </div>
       </section>
-      <section>
-        <header className="flex-col">
-        <p>Subscribe to get the Latest News</p>
-        <p>Don’t miss out on our latest news, updates, tips and special offers</p>
+      <section className="overflow-x-hidden">
+      <section className="relative flex h-[374px] flex-col items-center justify-center p-12 space-y-12"
+      style={{
+        background:"rgba(96,56,9,.9)",
+        backgroundImage: `url(${coffeeSubscribe})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        backgroundBlendMode: "multiply",
+      }}
+      >
+        <img className="w-[444px] absolute -bottom-1/2 -left-1/8" src={coffeeRight} alt="coffee pouring from right" />
+        <img className="w-[444px] absolute -bottom-1/2 -right-1/8" src={coffeeLeft} alt="coffee pouring from left" />
+        <header className="mx-auto flex flex-col space-y-2.5 items-center">
+          <h2 className="text-5xl font-bold text-white">
+          Subscribe to get the Latest News
+          </h2>
+          <p className="text-white text-xl">
+          Don’t miss out on our latest news, updates, tips and special offers
+          </p>
         </header>
         <div>
-          <input/>
-          <button>Subscribe</button>
+          <input className="bg-white p-5 py-2.5 outline-none rounded-l" placeholder="Enter your email"/>
+          <button className="p-5 py-2.5  font-bold rounded-r text-secondary bg-primary">Subscribe</button>
         </div>
+      </section>
+      <footer className="flex h-[492px] flex-col items-center justify-center p-12 space-y-12"
+        style={{
+          background:"rgba(96,56,9,.9)",
+          backgroundImage: ` url(${coffeeFooter})`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundPosition:"top",
+          backgroundBlendMode: "multiply",
+        }}>
+          <div className="flex flex-col items-center space-y-5 text-white">
+            <p className="text-3xl font-bold">Caffee</p>
+            <ul className="flex space-x-5 items-center capitalize">
+              <li><a href="#home">Home</a></li>
+              <li><a href="#contact">Contact Us</a></li>
+              <li><a href="#about">About Us</a></li>
+            </ul>
+            <p className="text-center max-w-xl">
+              Caffee is a coffee shop that provides you with quality coffee that helps boost your productivity and helps build your mood. Having a cup of coffee is good, but having a cup of real coffee is greater. There is no doubt that you will enjoy this coffee more than others you have ever tasted.
+            </p>
+            <p>&copy; {new Date().getFullYear} Caffee. All rights reserved.</p>
+          </div>
+      </footer>
       </section>
     </main>
   );
